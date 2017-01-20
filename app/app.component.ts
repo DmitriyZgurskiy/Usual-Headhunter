@@ -1,12 +1,5 @@
 import { Component } from '@angular/core';
-
-export class Headhunter {
-  id: number;
-  name: string;
-  email: string;
-  skype: string;
-  linkedin: string;
-}
+import { Headhunter } from './models/headhunter';
 
 const HEADHUNTERS: Headhunter[] = [
   { id: 0, name: 'Sandra', email: 'sandra@gmail.com', skype: 'sandra', linkedin: 'sandra'},
@@ -33,29 +26,7 @@ const HEADHUNTERS: Headhunter[] = [
       </li>   
     </ul>
     
-    <div *ngIf="selectedHeadhunter">
-      <h2>{{selectedHeadhunter.name}}</h2>
-      <div>
-        <label>id: </label>
-        {{selectedHeadhunter.id}}
-      </div>
-      <div>
-        <label>name: </label>
-        <input [(ngModel)]="selectedHeadhunter.name" placeholder="name">
-      </div>
-      <div>
-        <label>email: </label>
-        <input [(ngModel)]="selectedHeadhunter.email" placeholder="email">
-      </div>
-      <div>
-        <label>skype: </label>
-        <input [(ngModel)]="selectedHeadhunter.skype" placeholder="skype">
-      </div>
-      <div>
-        <label>linkedin: </label>
-        <input [(ngModel)]="selectedHeadhunter.linkedin" placeholder="linkedin">
-      </div>  
-    </div>
+    <headhunter-detail [headhunter]="selectedHeadhunter"></headhunter-detail>
   `,
   styles: [`
     .selected {
@@ -110,7 +81,7 @@ const HEADHUNTERS: Headhunter[] = [
 export class AppComponent  {
   title = 'Usual-Headhunter';
   headhunters = HEADHUNTERS;
-  selectedHeadhunter = Headhunter;
+  selectedHeadhunter: Headhunter;
 
   onSelect(headhunter: Headhunter): void {
     this.selectedHeadhunter = headhunter;
