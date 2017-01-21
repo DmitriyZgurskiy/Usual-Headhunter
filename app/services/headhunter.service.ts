@@ -7,4 +7,9 @@ export class HeadhunterService {
   getHeadhunters(): Promise<Headhunter[]> {
     return Promise.resolve(HEADHUNTERS);
   }
+  getHeadhuntersSlowly(): Promise<Headhunter> {
+    return new Promise(resolve => {
+      setTimeout(() => resolve(this.getHeadhunters()), 2000);
+    })
+  }
 }

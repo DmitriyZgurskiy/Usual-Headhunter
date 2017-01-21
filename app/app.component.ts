@@ -84,7 +84,7 @@ export class AppComponent implements OnInit{
   }
 
   getHeadhunters(): void {
-    this.headhunterService.getHeadhunters()
+    this.headhunterService.getHeadhuntersSlowly()
       .then(headhunters => this.headhunters = headhunters);
   }
 
