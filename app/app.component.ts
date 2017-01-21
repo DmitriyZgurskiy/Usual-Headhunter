@@ -1,13 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Headhunter } from './models/headhunter';
-
-const HEADHUNTERS: Headhunter[] = [
-  { id: 0, name: 'Sandra', email: 'sandra@gmail.com', skype: 'sandra', linkedin: 'sandra'},
-  { id: 1, name: 'Sveta', email: 'Sveta@gmail.com', skype: 'Sveta', linkedin: 'Sveta'},
-  { id: 2, name: 'Ivan', email: 'Ivan@gmail.com', skype: 'Ivan', linkedin: 'Ivan'},
-  { id: 3, name: 'Olya', email: 'Olya@gmail.com', skype: 'Olya', linkedin: 'Olya'},
-  { id: 4, name: 'Masha', email: 'Masha@gmail.com', skype: 'Masha', linkedin: 'Masha'}
-];
+import { HeadhunterService } from './services/headhunter.service';
 
 @Component({
   selector: 'my-app',
@@ -76,12 +69,24 @@ const HEADHUNTERS: Headhunter[] = [
       margin-right: .8em;
       border-radius: 4px 0 0 4px;
     }
-  `]
+  `],
+  providers: [HeadhunterService]
 })
-export class AppComponent  {
+export class AppComponent implements OnInit{
   title = 'Usual-Headhunter';
-  headhunters = HEADHUNTERS;
+  headhunters: Headhunter[];
   selectedHeadhunter: Headhunter;
+
+  constructor(private headhunterService: HeadhunterService) {}
+
+  ngOnInit(): void {
+    this.getHeadhunters();
+  }
+
+  getHeadhunters(): void {
+    this.headhunterService.getHeadhunters()
+      .then(headhunters => this.headhunters = headhunters);
+  }
 
   onSelect(headhunter: Headhunter): void {
     this.selectedHeadhunter = headhunter;
