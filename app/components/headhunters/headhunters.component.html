@@ -1,0 +1,16 @@
+<h2>My Headhunters</h2>
+
+<ul class="heroes">
+  <li *ngFor="let headhunter of headhunters"
+      [class.selected]="headhunter === selectedHeadhunter"
+      (click)="onSelect(headhunter)">
+    <span class="badge">{{headhunter.id}}</span> {{headhunter.name}}
+  </li>
+</ul>
+
+<div *ngIf="selectedHeadhunter">
+  <h2>
+    {{selectedHeadhunter.name | uppercase}} is my headhunter
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
